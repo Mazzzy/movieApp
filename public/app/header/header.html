@@ -1,0 +1,15 @@
+<div class="header" ng-controller="HeaderController as headerCtrl">
+    <div class="row">
+         <div class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <div class="navbar-header col-md-9">
+                    <a class="navbar-brand">{{headerCtrl.pageTitle}}</a>
+                </div>
+                <div class="col-md-3 pull-right head-username" ng-show="headerCtrl.loggedInUser!==null">
+                   <span>{{headerCtrl.loggedInUser}}</span>
+                   <button type="button" class="btn" data-ng-click="headerCtrl.logoutUser()">Logout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

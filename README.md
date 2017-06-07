@@ -5,7 +5,7 @@ A simple movieApp for demonstarting angular features.
 It contains login page, dashboard that have movie search facility.
 Use of nodejs for login purpose
 
-## It utilizes movie api from https://api.themoviedb.org with some key.
+### It utilizes movie api from https://api.themoviedb.org with some key.
 Sample movie search url is : https://api.themoviedb.org/3/search/movie?api_key=<api_key>&language=en-US&query=<movie_name>
 
 - First install packages using 'npm install'

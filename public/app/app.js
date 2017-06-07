@@ -3,7 +3,7 @@
  * @name angularApp
  * @description
  * # angularApp
- * Main module of the application 
+ * Main module of the application
  */
 
 
@@ -17,7 +17,8 @@
             'ngMessages',
             'ngResource',
             'ngSanitize',
-            'ngTouch'
+            'ngTouch',
+            'ui.bootstrap'          
         ])
         .run(["$rootScope", "$location", function($rootScope, $location) {
             $rootScope.$on("$routeChangeError", function(event, current, previous, eventObj) {
