@@ -36,6 +36,7 @@ module.exports = function(config) {
       'public/assets/lib/bootstrap/dist/js/bootstrap.js',
       'public/assets/lib/spin.js/spin.js',
       'public/assets/lib/angular-loading/angular-loading.js',
+      'public/assets/lib/angular-bootstrap/ui-bootstrap-tpls.js',
       'public/assets/lib/angular-mocks/angular-mocks.js',
       // endbower
       "public/app/**/*.js",

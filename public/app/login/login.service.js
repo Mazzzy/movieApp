@@ -29,7 +29,8 @@
 
             $http.post('http://localhost:8002/api/login', postData).then(function(response) {
                 if(response && response.data) {
-                    deferred.resolve(response.data);
+                    var resp = {"result":response.data,"uname":userName};
+                    deferred.resolve(resp);
                 }                
             }, function(error) {
                 console.log(error);

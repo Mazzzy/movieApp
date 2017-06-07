@@ -13,29 +13,25 @@
         .module('angularApp')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['LoginService', 'toastr', '$location', 'StorageUtil', '$loading'];
+    LoginController.$inject = ['LoginService', 'toastr', '$location', 'StorageUtil', '$loading', '$window'];
 
-    function LoginController( LoginService, toastr, $location, StorageUtil, $loading) {
-        
+    function LoginController( LoginService, toastr, $location, StorageUtil, $loading, $window) {
+
         this.submitForm = function(loginForm) {
-            if(loginForm.$valid) {                
+            if(loginForm.$valid) {
                 $loading.start('commonLoader');
-                LoginService.validateUserLoginDetils(this.loginField.email, this.loginField.password).then(function(result){
-                    if(result.LoginStatus === true) {
-                        // toastr.success('You are valid User', {
-                        //   closeButton: true
-                        // });
-                         
+                LoginService.validateUserLoginDetils(this.loginField.email, this.loginField.password).then(function(obj){
+                    if(obj.result.LoginStatus === true) {
                         $loading.finish('commonLoader');
-                        if(StorageUtil.setLocal('userId', result.id)) {
-                            $location.path('/home');    
+                        if(StorageUtil.setLocal('userId', obj.uname)) {
+                            $location.path('/home');
+                            $window.location.reload();
                         }
-                        
                     } else {
-						$loading.finish('commonLoader');
-                        toastr.error('You are not a valid User', {
-                          closeButton: true
-                        });
+						            $loading.finish('commonLoader');
+                          toastr.error('You are not a valid User', {
+                            closeButton: true
+                          });
                     }
                 }, function(error){
                     $loading.finish('commonLoader');

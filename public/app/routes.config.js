@@ -16,15 +16,16 @@
     RoutesConfig.$inject = ['$routeProvider', '$locationProvider'];
 
     function RoutesConfig($routeProvider, $locationProvider) {
-    
+
         $routeProvider
             .when('/home', {
                 templateUrl: 'app/home/home.html',
                 controller: 'HomeController',
                 controllerAs: 'homeCtrl',
+                activetab: 'home',
                 resolve: {
-                    auth: ["$q", "loginAuthenticationFactory", function($q, loginAuthenticationFactory) {
-                        var userId = loginAuthenticationFactory.getLoggedInUserId();
+                    auth: ["$q", "loginAuthenticationService", function($q, loginAuthenticationService) {
+                        var userId = loginAuthenticationService.getLoggedInUserId();
 
                         if (userId) {
                             return $q.resolve();
@@ -40,11 +41,12 @@
                 templateUrl: 'app/login/login.html',
                 controller: 'LoginController',
                 controllerAs: 'loginCtrl',
+                // activetab: 'login',
                 resolve: {
-                    auth: ["$q", "loginAuthenticationFactory", function($q, loginAuthenticationFactory) {
-                        var userId = loginAuthenticationFactory.getLoggedInUserId();
+                    auth: ["$q", "loginAuthenticationService", function($q, loginAuthenticationService) {
+                        var userId = loginAuthenticationService.getLoggedInUserId();
 
-                        if (userId) {                                
+                        if (userId) {
                             return $q.reject({
                                 authenticated: true
                             });
