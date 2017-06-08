@@ -1,11 +1,21 @@
-<div class="row">
-	<div class="col-xs-10 col-md-10">
-		<p>{{homeCtrl.content}}</p>
-	</div>
-
-	<div class="col-xs-2 col-md-2">
-		<span data-ng-click="homeCtrl.logoutUser()">Logout </span>
-	</div>
-
+<div>
+  <div class="row">
+    <div class="home-header">
+      <div class="row">
+        <h1 class="intro-header">Find the movie!</h1>
+      </div>
+      <div class="row">
+          <div class="search-container">
+              <search-input></search-input>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" class="home-margin-bottom">
+    <div class="col-sm-12">
+      <div ng-repeat="movie in homeCtrl.movieList">
+          <movie-details data-movie="{{movie}}"></movie-details>
+      </div>
+    </div>
+  </div>
 </div>
-

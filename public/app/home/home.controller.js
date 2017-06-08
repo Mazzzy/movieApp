@@ -13,26 +13,29 @@
         .module('angularApp')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['HomeService', 'StorageUtil', '$location'];
+    HomeController.$inject = ['MovieSearchService', 'StorageUtil', '$location', '$scope'];
 
-    function HomeController(HomeService, StorageUtil, $location) {
-    	var vm = this;
-        vm.loadHomePageData = function() {
-            HomeService.getHomePageData().then(function(result) {
-                vm.content = result.content;
-            }, function(error){
+    function HomeController(MovieSearchService, StorageUtil, $location, $scope) {
+      var self = this;
+      self.movieList = [];
 
-            });
+      // watch for updated movie list based on search
+      // note: angular.bind specifically to have results from MovieSearchService
+      //       into current 'controller as' movieList rather than $scope
+      $scope.$watch(function () {
+          return MovieSearchService.results;
+      },angular.bind(this, function (searchedMovies) {
+        if (searchedMovies) {
+          this.movieList = searchedMovies;
+          return this.movieList;
         }
+      }));
 
-        vm.logoutUser = function() {
-            var status = StorageUtil.removeLocal('userId');
-            if(status) {
-                $location.path('/login');
-            }
-        }
-
-        vm.loadHomePageData();
+      self.logoutUser = function() {
+          var status = StorageUtil.removeLocal('userId');
+          if(status) {
+              $location.path('/login');
+          }
+      }
     }
-
 })();
